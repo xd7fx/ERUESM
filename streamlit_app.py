@@ -1,8 +1,8 @@
 import streamlit as st
-from models.auvi_lstm_model import EmotionRecognizer 
-from models import AuViLSTMModel ,EmotionRecognizer
+from models.auvi_lstm_model import EmotionRecognizer
+from models import AuViLSTMModel
 
-print("Starting the Streamlit app...")  # لمعرفة أن التطبيق بدأ العمل
+print("Starting the Streamlit app...")
 
 MODEL_PATH = "D:\\pro\\rrr-master\\models\\auvi_lstm_model.pkl"
 
@@ -25,8 +25,13 @@ if uploaded_file is not None:
     st.write("Processing video...")
 
     try:
+        # Save the uploaded file temporarily
+        temp_file_path = f"temp_{uploaded_file.name}"
+        with open(temp_file_path, "wb") as f:
+            f.write(uploaded_file.getbuffer())
+        
         print("Starting prediction...")
-        result = emotion_recognizer.predict_emotion(uploaded_file.name)
+        result = emotion_recognizer.predict_emotion(temp_file_path)
         print("Prediction complete!")
         st.write("Top Emotion:", result["top_emotion"])
         st.write("Probabilities:", result["probabilities"])
