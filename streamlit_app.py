@@ -4,7 +4,7 @@ from models.auvi_lstm_model import AuViLSTMModel  # تأكد من أن هذا ا
 
 print("Starting the Streamlit app...")
 
-MODEL_PATH = "D:\\pro\\rrr-master\\models\\auvi_lstm_model.pkl"
+MODEL_PATH = "models/auvi_lstm_model.pkl"
 
 st.title("Emotion Recognition App")
 
