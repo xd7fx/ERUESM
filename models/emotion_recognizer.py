@@ -2,7 +2,7 @@ import torch
 from typing import Dict, Any
 
 class EmotionRecognizer(torch.nn.Module):
-    def init(self, num_classes: int = 5, hidden_size: int = 384):
+    def __init__(self, num_classes: int = 5, hidden_size: int = 384):
         super().init()
         self.hidden_size = hidden_size
         self.rnn = torch.nn.GRU(
