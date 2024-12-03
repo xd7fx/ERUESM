@@ -8,3 +8,4 @@ Pillow
 facenet-pytorch
 PyYAML
 torchaudio
+pydub
