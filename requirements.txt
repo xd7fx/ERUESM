@@ -9,3 +9,4 @@ facenet-pytorch
 PyYAML
 torchaudio
 pydub
+matplotlib
