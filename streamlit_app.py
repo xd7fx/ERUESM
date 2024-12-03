@@ -1,6 +1,6 @@
 import streamlit as st
 from models import AuViLSTMModel, EmotionRecognizer
-
+from models.emotion_recognizer import EmotionRecognizer 
 print("Starting the Streamlit app...")  # لمعرفة أن التطبيق بدأ العمل
 
 MODEL_PATH = "D:\\pro\\rrr-master\\models\\auvi_lstm_model.pkl"
