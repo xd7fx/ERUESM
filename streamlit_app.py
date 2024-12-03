@@ -1,5 +1,4 @@
 import streamlit as st
-from models import AuViLSTMModel, EmotionRecognizer
 from models.auvi_lstm_model import EmotionRecognizer 
 from models.emotion_recognizer import AuViLSTMModel 
 
