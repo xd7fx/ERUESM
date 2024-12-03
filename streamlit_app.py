@@ -1,5 +1,5 @@
 import streamlit as st
-from models.auvi_lstm_model import EmotionRecognizer
+from models.emotion_recognizer import EmotionRecognizer  # الاستيراد من الملف الصحيح
 from models import AuViLSTMModel
 
 print("Starting the Streamlit app...")
