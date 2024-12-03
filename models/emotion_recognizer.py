@@ -3,7 +3,7 @@ from typing import Dict, Any
 
 class EmotionRecognizer(torch.nn.Module):
     def __init__(self, num_classes: int = 5, hidden_size: int = 384):
-        super().init()
+        super().__init__()
         self.hidden_size = hidden_size
         self.rnn = torch.nn.GRU(
             input_size=hidden_size,
@@ -12,7 +12,7 @@ class EmotionRecognizer(torch.nn.Module):
             batch_first=True
         )
         self.classifier = torch.nn.Linear(hidden_size, num_classes)
-        self.emotion_labels = ['angry', 'calm', 'disgust', 'fearful', 'happy', 'neutral', 'sad','surprised']
+        self.emotion_labels = ['angry', 'calm', 'disgust', 'fearful', 'happy', 'neutral', 'sad', 'surprised']
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         _, h_n = self.rnn(x)
