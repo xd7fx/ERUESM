@@ -1,5 +1,4 @@
 import torch
-from torchvision.transforms import ToTensor
 from typing import Dict, Any
 
 class EmotionRecognizer(torch.nn.Module):
@@ -13,6 +12,7 @@ class EmotionRecognizer(torch.nn.Module):
             batch_first=True
         )
         self.classifier = torch.nn.Linear(hidden_size, num_classes)
+        self.emotion_labels = ['angry', 'calm', 'disgust', 'fearful', 'happy', 'neutral', 'sad','surprised']
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         _, h_n = self.rnn(x)
@@ -24,8 +24,7 @@ class EmotionRecognizer(torch.nn.Module):
         """
         print(f"Processing video: {video_path}")
 
-        # استخدم مكتبة لاستخراج الإطارات من الفيديو (مثل OpenCV)
-        # الميزات الافتراضية هنا للتوضيح فقط
+        # افترض ميزات افتراضية للتجربة
         dummy_features = torch.randn(10, self.hidden_size)  # 10 إطارات افتراضية
         return dummy_features.unsqueeze(0)  # [batch_size, sequence_length, hidden_size]
 
@@ -35,9 +34,14 @@ class EmotionRecognizer(torch.nn.Module):
         """
         features = self.preprocess_video(video_path)
         predictions = self.forward(features)
-        predicted_class = predictions.argmax(dim=1).item()
+        predicted_class = predictions.argmax(dim=1).item()  # الحصول على الفئة المتوقعة
+        
+        top_emotion = self.emotion_labels[predicted_class]  # تحويل الفئة إلى شعور
         
         return {
-            "top_emotion": predicted_class,
-            "probabilities": predictions.softmax(dim=1).tolist()
+            "top_emotion": top_emotion,
+            "probabilities": {
+                self.emotion_labels[i]: prob.item()
+                for i, prob in enumerate(predictions.softmax(dim=1)[0])  # تعيين الاحتمالات لكل شعور
+            }
         }
