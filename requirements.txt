@@ -7,3 +7,4 @@ gdown
 Pillow
 facenet-pytorch
 PyYAML
+torchaudio
